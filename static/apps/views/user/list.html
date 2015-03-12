@@ -1,0 +1,118 @@
+<div>
+	<div class="row">
+  		<div class="col-md-10"><h1>Users</h1></div>
+  		<div class="col-md-2" style="padding-top: 25px;">
+  			<button type="button" class="btn btn-primary" data-toggle="modal" ng-click="openSave()" data-target="#modalCreate">Crear</button>
+  			<a class="btn btn-success" href="#/group">Grupos</a>
+  		</div>
+	</div>
+	<hr>
+	<div ng-if="users.length > 0">
+		<form>
+		  <div class="form-group">
+		    <input type="text" class="form-control" ng-model="search" placeholder="Search">
+		  </div>
+		</form>
+		<table class="table table-striped">
+		  <thead>
+		  	<tr>
+		  		<th>Id</th>
+		  		<th>Photo</th>
+		  		<th>Name</th>
+		  		<th>LastName</th>
+		  		<th>Options</th>
+		  	</tr>
+		  </thead>
+		  <tbody>
+		  	<tr ng-repeat="user in users | filter:search">
+		  		<td>{{ user.Id }}</td>
+		  		<td><img ng-src="{{ user.Photo }}" style="width: 100px;"></td>
+		  		<td>{{ user.Name }}</td>
+		  		<td>{{ user.LastName }}</td>
+		  		<td><a href="" ng-click="openUpdate($index)">Update</a> | 
+		  			<a href="" ng-click="delete($index)">delete</a></td>
+		  	</tr>
+		  </tbody>
+		</table>
+	</div>
+	<div ng-if="users.length == 0"> 
+		No tiene usuarios registrados
+	</div>
+
+
+
+	  <!-- Modal User
+      ================================================== -->
+      <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Register Userr</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" name="registerForm" novalidate>
+                <div class="form-group">
+                  <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail" ng-model="register_user.Email" placeholder="Email" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword" ng-model="register_user.Password" placeholder="Password" required> 
+                  </div>
+              </div>
+
+                  <div class="form-group">
+	                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+	                  <div class="col-sm-10">
+	                    <input type="text" class="form-control" id="inputName" ng-model="register_user.Name" placeholder="Name" required>
+	                  </div>
+	               </div>
+
+
+                  <div class="form-group">
+	                  <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+	                  <div class="col-sm-10">
+	                    <input type="text" class="form-control" id="inputLastName" ng-model="register_user.LastName" placeholder="Last Name" required>
+	                  </div>
+	               </div>
+
+
+                  <div class="form-group">
+	                  <label for="inputAddress" class="col-sm-2 control-label">Address</label>
+	                  <div class="col-sm-10">
+	                    <input type="text" class="form-control" id="inputAddress" ng-model="register_user.Address" placeholder="Address" required>
+	                  </div>
+	               </div>
+
+	                <div class="form-group">
+	                  <label for="inputPhoto" class="col-sm-2 control-label">Photo</label>
+	                  <div class="col-sm-10">
+	                    <input type="photo" class="form-control" id="inputPhoto" ng-model="register_user.Photo" placeholder="Photo" required>
+	                  </div>
+	               </div>
+
+
+	                <div class="form-group">
+	                  <label for="inputGroup" class="col-sm-2 control-label">Group</label>
+	                  <div class="col-sm-10">
+	                  	<select ng-model="register_user.group" ng-options="group.Name for group in groups" required>
+	                  		<option value="">Seleccione un grupo</option> 
+	                  	</select>
+	                  </div>
+	               </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" ng-click="save()" ng-show="modal_save">Create</button>
+              <button type="button" class="btn btn-primary" ng-click="update()" ng-show="!modal_save">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
